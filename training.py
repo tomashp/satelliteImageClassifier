@@ -5,6 +5,8 @@ import tensorflow as tf
 import pickle
 import logging
 
+log_path = 'trainingLogs'
+
 def load_label_names():
     return ['other', 'water', 'fores', 'city']
 
@@ -177,13 +179,15 @@ def conv_net(x, keep_prob):
     out = tf.contrib.layers.fully_connected(inputs=full3, num_outputs=4, activation_fn=None)
     return out
 
-def train_neural_network(session, optimizer, keep_probability, feature_batch, label_batch, x, y, keep_prob):
-    session.run(optimizer, 
+def train_neural_network(session, optimizer, keep_probability, feature_batch, label_batch, x, y, keep_prob, train_writer):
+    summary = session.run(optimizer, 
                 feed_dict={
                     x: feature_batch,
                     y: label_batch,
                     keep_prob: keep_probability
                 })
+    tempIterator += 1
+    train_writer.add_summary(summary, tempIterator)
 
 def print_stats(session, feature_batch, label_batch, cost, accuracy, x, y, keep_prob, sess, valid_features, valid_labels):
     loss = sess.run(cost, 
@@ -232,6 +236,7 @@ def run(dataset_folder_path, save_model_path, batchName):
     # display_stats(dataset_folder_path, batchName, 1, sample_id)
     # display_stats(dataset_folder_path, batchName, 2, sample_id)
     # display_stats(dataset_folder_path, batchName, 3, sample_id)
+    tempIterator = 0
     logging.info('Running CNN training')
     preprocess_and_save_data(dataset_folder_path, batchName, normalize, one_hot_encode)
     valid_features, valid_labels = pickle.load(open(dataset_folder_path + 'preprocess_validation.p', mode='rb'))
@@ -261,19 +266,23 @@ def run(dataset_folder_path, save_model_path, batchName):
     correct_pred = tf.equal(tf.argmax(logits, 1), tf.argmax(y, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32), name='accuracy')
 
+    
+
     print('Training...')
     logging.info('Training...')
     with tf.Session() as sess:
         # Initializing the variables
         sess.run(tf.global_variables_initializer())
-        
+
+        train_writer = tf.summary.FileWriter(log_path, sess.graph )
+
         # Training cycle
         for epoch in range(epochs):
             # Loop over all batches
             n_batches = 5
             for batch_i in range(1, n_batches):
                 for batch_features, batch_labels in load_preprocess_training_batch(batch_i, batch_size, dataset_folder_path):
-                    train_neural_network(sess, optimizer, keep_probability, batch_features, batch_labels, x, y, keep_prob)
+                    train_neural_network(sess, optimizer, keep_probability, batch_features, batch_labels, x, y, keep_prob, train_writer)
                     
                 print('Epoch {:>2}, Batch {}:  '.format(epoch + 1, batch_i), end='')
                 logging.info('Epoch {:>2}, Batch {}:  '.format(epoch + 1, batch_i))

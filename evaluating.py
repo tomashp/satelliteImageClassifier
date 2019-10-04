@@ -5,11 +5,12 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import logging
+import confusionMatrixDisp as confMtx
 
 batch_size = 64
 n_samples = 10
 top_n_predictions = 5
-log_path = 'validationLogs'
+log_path = 'allDataValidLogs'
 allDataPredictions = {}
 labelsPredictions = []
 labelsList = []
@@ -82,9 +83,10 @@ def test_model( save_model_path, allDataPreProcessedPath ):
         print('Testing Accuracy: {}\n'.format(test_batch_acc_total/test_batch_count))
         logging.info('ALL DATA: Testing Accuracy: %s', (test_batch_acc_total/test_batch_count) )
 
-        confusion = tf.math.confusion_matrix(labelsList, labelsPredictions, num_classes= 5)
+        confusion = tf.math.confusion_matrix(labelsList, labelsPredictions, num_classes= 4)
         print('Confusion Matrix:\n', confusion.eval(session=sess))
         logging.info('ALL DATA: Confusion Matrix:\n %s', confusion.eval(session=sess) )
+        confMtx._test_cm( confusion , "Zbiór cały" )
 
     f = open("allDataPredictions.pkl","wb")
     pickle.dump(allDataPredictions,f)

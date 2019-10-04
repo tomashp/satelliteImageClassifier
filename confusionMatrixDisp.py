@@ -124,7 +124,7 @@ def insert_totals(df_cm):
     #print ('\ndf_cm:\n', df_cm, '\n\b\n')
 #
 
-def pretty_plot_confusion_matrix(df_cm, annot=True, cmap="Oranges", fmt='.2f', fz=11,
+def pretty_plot_confusion_matrix(df_cm, plotName, annot=True, cmap="Oranges", fmt='.2f', fz=11,
       lw=0.5, cbar=False, figsize=[5,5], show_null_values=0, pred_val_axis='y'):
     """
       print conf matrix with default layout (like matlab)
@@ -201,40 +201,13 @@ def pretty_plot_confusion_matrix(df_cm, annot=True, cmap="Oranges", fmt='.2f', f
     ax.set_ylabel(ylbl)
     plt.tight_layout()  #set layout slim
     plt.show()
+    plt.savefig()
 #
-
-def plot_confusion_matrix_from_data(y_test, predictions, columns=None, annot=True, cmap="Oranges",
-      fmt='.2f', fz=11, lw=0.5, cbar=False, figsize=[8,8], show_null_values=0, pred_val_axis='lin'):
-    """
-        plot confusion matrix function with y_test (actual values) and predictions (predic),
-        whitout a confusion matrix yet
-    """
-    from sklearn.metrics import confusion_matrix
-    from pandas import DataFrame
-
-    #data
-    if(not columns):
-        #labels axis integer:
-        ##columns = range(1, len(np.unique(y_test))+1)
-        #labels axis string:
-        from string import ascii_uppercase
-        columns = ['class %s' %(i) for i in list(ascii_uppercase)[0:len(np.unique(y_test))]]
-
-    confm = confusion_matrix(y_test, predictions)
-    cmap = 'Oranges';
-    fz = 11;
-    figsize=[9,9];
-    show_null_values = 2
-    df_cm = DataFrame(confm, index=columns, columns=columns)
-    pretty_plot_confusion_matrix(df_cm, fz=fz, cmap=cmap, figsize=figsize, show_null_values=show_null_values, pred_val_axis=pred_val_axis)
-#
-
-
 
 #
 #TEST functions
 #
-def _test_cm():
+def _test_cm( array , plotName ):
     #test function with confusion matrix done
     array = np.array([  [1335,    0,   10,   55],
                         [   0, 1399,    0,    1],
@@ -244,45 +217,12 @@ def _test_cm():
     df_cm = DataFrame(array, index=range(0,4), columns=range(0,4))
     #colormap: see this and choose your more dear
     cmap = 'PuRd'
-    pretty_plot_confusion_matrix(df_cm, cmap=cmap)
-#
+    pretty_plot_confusion_matrix(df_cm, plotName, cmap=cmap)
 
-def _test_data_class():
-    """ test function with y_test (actual values) and predictions (predic) """
-    #data
-    y_test = np.array([1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5])
-    predic = np.array([1,2,4,3,5, 1,2,4,3,5, 1,2,3,4,4, 1,4,3,4,5, 1,2,4,4,5, 1,2,4,4,5, 1,2,4,4,5, 1,2,4,4,5, 1,2,3,3,5, 1,2,3,3,5, 1,2,3,4,4, 1,2,3,4,1, 1,2,3,4,1, 1,2,3,4,1, 1,2,4,4,5, 1,2,4,4,5, 1,2,4,4,5, 1,2,4,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5, 1,2,3,4,5])
-    """
-      Examples to validate output (confusion matrix plot)
-        actual: 5 and prediction 1   >>  3
-        actual: 2 and prediction 4   >>  1
-        actual: 3 and prediction 4   >>  10
-    """
-    columns = []
-    annot = True;
-    cmap = 'Oranges';
-    fmt = '.2f'
-    lw = 0.5
-    cbar = False
-    show_null_values = 2
-    pred_val_axis = 'y'
-    #size::
-    fz = 12;
-    figsize = [9,9];
-    if(len(y_test) > 10):
-        fz=9; figsize=[14,14];
-    plot_confusion_matrix_from_data(y_test, predic, columns,
-      annot, cmap, fmt, fz, lw, cbar, figsize, show_null_values, pred_val_axis)
-#
-
-
-#
-#MAIN function
-#
-if(__name__ == '__main__'):
-    print('__main__')
-    print('_test_cm: test function with confusion matrix done\nand pause')
-    _test_cm()
-    #plt.pause(5)
-    #print('_test_data_class: test function with y_test (actual values) and predictions (predic)')
-    #_test_data_class()
+# #
+# #MAIN function
+# #
+# if(__name__ == '__main__'):
+#     print('__main__')
+#     print('_test_cm: test function with confusion matrix done\nand pause')
+#     _test_cm()
