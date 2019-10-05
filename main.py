@@ -22,11 +22,11 @@ logging.info('Process of %s is starting', processName )
 if processName is "FullResolution":
     mainRasterPath = 'C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialu.tif'
     samplesPaths = "D:/cutData32/"
-    dataset_folder_path = 'D:/FullResolution1/'
+    dataset_folder_path = 'D:/FullResolution3_count/'
 else:
     mainRasterPath = 'C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialuSmooth.tif'
     samplesPaths = "D:/cutData32HalfResolution/"
-    dataset_folder_path = 'D:/HalfResolution1/'
+    dataset_folder_path = 'D:/HalfResolution3_count/'
 
 # change saveSamplesToDisc = True if you are cuting raster for first time.
 saveSamplesToDisc = False    
@@ -57,17 +57,17 @@ logging.info('All data from raster will be kept in %s', allDataPreProcessedPath 
 # and create List of all samples [ name, classId, % of pixels of the class] and saves it to dataset_folder_path
 #samplesList = raster.sampleriseRaster(mainRasterPath, samplesPaths, dataset_folder_path + processName + "SamplesList", saveSamplesToDisc)
 #if you skip line before uncoment below
-with open(dataset_folder_path + processName + "SamplesList.pkl", mode='rb') as file:
-   samplesList = pickle.load(file, encoding='latin1')
+# with open(dataset_folder_path + processName + "SamplesList.pkl", mode='rb') as file:
+#    samplesList = pickle.load(file, encoding='latin1')
 
 # prepers input for CNN
 # dataConversion.prepBatches( samplesList, samplesPaths, 7000, dataset_folder_path + processName + "TrainingBatch")       # for prepered set
-dataConversion.prepBatches( samplesList, samplesPaths, 61168, allDataPreProcessedPath + processName + "AllDataBatch")   # for All data set
+# dataConversion.prepBatches( samplesList, samplesPaths, 61168, allDataPreProcessedPath + processName + "AllDataBatch")   # for All data set
 
 # trains the network
-#training.run(dataset_folder_path, save_model_path, processName + "TrainingBatch")
+training.run(dataset_folder_path, save_model_path, processName + "TrainingBatch")
 # test data evaluating
-#evalTrainings.test_model( save_model_path, dataset_folder_path )
+evalTrainings.test_model( save_model_path, dataset_folder_path )
 # evaluate network on all data
-#processAllDataForValidation.preprocess_and_save_data(allDataPreProcessedPath  + processName )
+processAllDataForValidation.preprocess_and_save_data(allDataPreProcessedPath  + processName )
 evaluating.test_model( save_model_path, allDataPreProcessedPath ) # allDataPreProcessedPath must be path to folder, all data '.p' will be used  during evaluation 

@@ -90,3 +90,10 @@ Use standard file APIs to check for files with this prefix.
 2019-10-05 16:20:13,281 Model will be saved D:/HalfResolution1/model/image_classification
 2019-10-05 16:20:13,281 All data from raster will be kept in D:/HalfResolution1/preprocessedAllDataBatch/
 2019-10-05 16:20:21,320 Preparing data batches for  61168 samples
+2019-10-05 17:56:44,377 Process of HalfResolution is starting
+2019-10-05 17:56:44,379 Main raster: C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialuSmooth.tif
+2019-10-05 17:56:44,379 Samples from main raster D:/cutData32HalfResolution/. Will be save to disc: False
+2019-10-05 17:56:44,379 Dataset folder path D:/HalfResolution1/
+2019-10-05 17:56:44,379 Model will be saved D:/HalfResolution1/model/image_classification
+2019-10-05 17:56:44,380 All data from raster will be kept in D:/HalfResolution1/preprocessedAllDataBatch/
+2019-10-05 18:13:38,222 Batch: D:/HalfResolution1/preprocessedAllDataBatch/HalfResolutionAllDataBatch0 size is: 23531

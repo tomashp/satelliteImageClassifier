@@ -68,4 +68,4 @@ def test_model( save_model_path, filePath ):
         confusion = tf.math.confusion_matrix(labelsList, labelsPredictions, num_classes= 4)
         print('Confusion Matrix:\n', confusion.eval(session=sess))
         logging.info('Confusion Matrix:\n %s', confusion.eval(session=sess) )
-        confMtx._test_cm( confusion, "Zbiór testowy" )
+        #confMtx._test_cm( confusion, "Zbiór testowy" )
