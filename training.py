@@ -179,15 +179,15 @@ def conv_net(x, keep_prob):
     out = tf.contrib.layers.fully_connected(inputs=full3, num_outputs=4, activation_fn=None)
     return out
 
-def train_neural_network(session, optimizer, keep_probability, feature_batch, label_batch, x, y, keep_prob, train_writer):
+def train_neural_network(session, optimizer, keep_probability, feature_batch, label_batch, x, y, keep_prob, train_writer, tempIterator):
     summary = session.run(optimizer, 
                 feed_dict={
                     x: feature_batch,
                     y: label_batch,
                     keep_prob: keep_probability
                 })
-    tempIterator += 1
-    train_writer.add_summary(summary, tempIterator)
+    #tempIterator += 1
+    #train_writer.add_summary(summary, tempIterator)
 
 def print_stats(session, feature_batch, label_batch, cost, accuracy, x, y, keep_prob, sess, valid_features, valid_labels):
     loss = sess.run(cost, 
@@ -282,7 +282,7 @@ def run(dataset_folder_path, save_model_path, batchName):
             n_batches = 5
             for batch_i in range(1, n_batches):
                 for batch_features, batch_labels in load_preprocess_training_batch(batch_i, batch_size, dataset_folder_path):
-                    train_neural_network(sess, optimizer, keep_probability, batch_features, batch_labels, x, y, keep_prob, train_writer)
+                    train_neural_network(sess, optimizer, keep_probability, batch_features, batch_labels, x, y, keep_prob, train_writer, tempIterator)
                     
                 print('Epoch {:>2}, Batch {}:  '.format(epoch + 1, batch_i), end='')
                 logging.info('Epoch {:>2}, Batch {}:  '.format(epoch + 1, batch_i))

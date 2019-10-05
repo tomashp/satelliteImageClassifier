@@ -196,12 +196,13 @@ def pretty_plot_confusion_matrix(df_cm, plotName, annot=True, cmap="Oranges", fm
         ax.text(item['x'], item['y'], item['text'], **item['kw'])
 
     #titles and legends
-    ax.set_title('Sieć pierwsza - zbiór testowy')
+    ax.set_title(plotName)
     ax.set_xlabel(xlbl)
     ax.set_ylabel(ylbl)
     plt.tight_layout()  #set layout slim
-    plt.show()
-    plt.savefig()
+    #plt.show()
+    plt.savefig( plotName + '.png')
+    plt.close
 #
 
 #
@@ -209,10 +210,10 @@ def pretty_plot_confusion_matrix(df_cm, plotName, annot=True, cmap="Oranges", fm
 #
 def _test_cm( array , plotName ):
     #test function with confusion matrix done
-    array = np.array([  [1335,    0,   10,   55],
-                        [   0, 1399,    0,    1],
-                        [  34,    0, 1359,    7],
-                        [ 201,    2,   38,  743]])
+    # array = np.array([  [1335,    0,   10,   55],
+    #                     [   0, 1399,    0,    1],
+    #                     [  34,    0, 1359,    7],
+    #                     [ 201,    2,   38,  743]])
     #get pandas dataframe
     df_cm = DataFrame(array, index=range(0,4), columns=range(0,4))
     #colormap: see this and choose your more dear
