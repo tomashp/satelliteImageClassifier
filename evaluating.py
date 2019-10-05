@@ -88,7 +88,7 @@ def test_model( save_model_path, allDataPreProcessedPath ):
         logging.info('ALL DATA: Confusion Matrix:\n %s', confusion.eval(session=sess) )
         confMtx._test_cm( confusion , "Zbiór cały" )
 
-    f = open("allDataPredictions.pkl","wb")
+    f = open("allDataPredictionsTEST.pkl","wb")
     pickle.dump(allDataPredictions,f)
     f.close()
 

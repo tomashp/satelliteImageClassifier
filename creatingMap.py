@@ -17,37 +17,34 @@ maskList = []
 # Takes a Rasterio dataset and splits it into squares of dimensions squareDim * squareDim
 def createClassifiedMap(img, squareDim, transform):
     numberOfCellsWide = img.shape[1] // squareDim
-    numberOfCellsHigh = img.shape[2] // squareDim
+    numberOfCellsHigh = img.shape[0] // squareDim
     x, y = 0, 0
     count = 0
     for hc in range(numberOfCellsHigh ):
         y = hc * squareDim
-        if count == 20:
-                break
+        # if count == 20:
+        #         break
         for wc in range(numberOfCellsWide):
             x = wc * squareDim
             classifieGeom(img, count , x, y, squareDim, transform)
             print ("hc: {}".format(hc))
             print ("wc: {}".format(wc))
             count = count + 1
-            if count == 20:
-                break
+            # if count == 20:
+            #     break
 
 
 # Crop the dataset using the generated box and write it out as a GeoTIFF https://datacarpentry.org/image-processing/04-drawing-bitwise/
 def classifieGeom(img, count, x, y, squareDim, transform):
-    corner1 = (x, y) * transform
-    corner2 = (x + squareDim, y + squareDim) * transform
-    tempMask = np.zeros(shape = img.shape, dtype = "float32")
+    corner1 = (x, y) #* transform
+    corner2 = (x + squareDim, y + squareDim) #* transform
     # Draw a white, filled rectangle on the mask image
     color = classifiedList[count][1] # assigns class ID as a color
-    cv2.rectangle(img = tempMask, 
+    cv2.rectangle(img = img, 
         pt1 = (int(corner1[0]), int(corner1[1])), pt2 = (int(corner2[0]), int(corner2[1])), 
-        color = (color,color,color), 
+        color = (color), 
         thickness = int(-1))
     
-    # Apply the mask and display the result
-    img = cv2.bitwise_and(src1 = img, src2 = tempMask)
 
 # Write the passed in dataset as a GeoTIFF
 def writeImageAsGeoTIFF(img, transform, metadata, crs, filename):
@@ -87,7 +84,8 @@ listDestination = "D:/FullResolution1/allDataPredictions.pkl"
 #rasterPath = 'C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialuSmooth.tif'
 src = rasterio.open( rasterPath )
 
-array = src.read()
+array = np.zeros(shape = (10980,10980) , dtype = "uint8")
+array.fill(255)
 # Create the basic black image 
 # createMasks()
 

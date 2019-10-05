@@ -56,3 +56,37 @@ See `tf.nn.softmax_cross_entropy_with_logits_v2`.
 
 2019-10-04 11:22:12,831 From c:\Users\PlochaTo\.vscode\extensions\ms-python.python-2019.9.34911\pythonFiles\lib\python\ptvsd\_vendored\pydevd\_pydevd_bundle\pydevd_resolver.py:214: The name tf.train.CheckpointSaverHook is deprecated. Please use tf.estimator.CheckpointSaverHook instead.
 
+2019-10-05 16:02:58,340 Process of HalfResolution is starting
+2019-10-05 16:02:58,341 Main raster: C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialuSmooth.tif
+2019-10-05 16:02:58,341 Samples from main raster D:/cutData32HalfResolution/. Will be save to disc: False
+2019-10-05 16:02:58,341 Dataset folder path D:/HalfResolution2/
+2019-10-05 16:02:58,341 Model will be saved D:/HalfResolution2/model/image_classification
+2019-10-05 16:02:58,342 All data from raster will be kept in D:/HalfResolution2/preprocessedAllDataBatch/
+2019-10-05 16:02:58,368 From d:\satelliteImageClassifier\evaluating.py:40: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+
+2019-10-05 16:02:58,390 From d:\satelliteImageClassifier\evaluating.py:42: The name tf.train.import_meta_graph is deprecated. Please use tf.compat.v1.train.import_meta_graph instead.
+
+2019-10-05 16:02:59,024 From D:\Anaconda\lib\site-packages\tensorflow\python\training\saver.py:1276: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+2019-10-05 16:02:59,031 Restoring parameters from D:/HalfResolution2/model/image_classification
+2019-10-05 16:02:59,324 From d:\satelliteImageClassifier\evaluating.py:56: The name tf.summary.FileWriter is deprecated. Please use tf.compat.v1.summary.FileWriter instead.
+
+2019-10-05 16:02:59,633 ALL DATA: Evaluating...
+2019-10-05 16:03:03,024 ALL DATA: Test features size is: 37900
+2019-10-05 16:03:03,025 ALL DATA: Test labels size is: 37900
+2019-10-05 16:03:03,026 ALL DATA: Img names size is: 37900
+2019-10-05 16:11:01,638 Tensor._shape is private, use Tensor.shape instead. Tensor._shape will eventually be removed.
+2019-10-05 16:17:23,302 Process of HalfResolution is starting
+2019-10-05 16:17:23,303 Main raster: C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialuSmooth.tif
+2019-10-05 16:17:23,303 Samples from main raster D:/cutData32HalfResolution/. Will be save to disc: False
+2019-10-05 16:17:23,303 Dataset folder path D:/HalfResolution1/
+2019-10-05 16:17:23,304 Model will be saved D:/HalfResolution1/model/image_classification
+2019-10-05 16:17:23,304 All data from raster will be kept in D:/HalfResolution1/preprocessedAllDataBatch/
+2019-10-05 16:20:13,279 Process of HalfResolution is starting
+2019-10-05 16:20:13,280 Main raster: C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialuSmooth.tif
+2019-10-05 16:20:13,280 Samples from main raster D:/cutData32HalfResolution/. Will be save to disc: False
+2019-10-05 16:20:13,280 Dataset folder path D:/HalfResolution1/
+2019-10-05 16:20:13,281 Model will be saved D:/HalfResolution1/model/image_classification
+2019-10-05 16:20:13,281 All data from raster will be kept in D:/HalfResolution1/preprocessedAllDataBatch/
+2019-10-05 16:20:21,320 Preparing data batches for  61168 samples
