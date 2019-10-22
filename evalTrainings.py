@@ -60,12 +60,10 @@ def test_model( save_model_path, filePath ):
                 feed_dict={loaded_x: train_feature_batch, loaded_y: train_label_batch, loaded_keep_prob: 1.0})
             test_batch_count += 1
 
-            #file_writer.add_summary( (test_batch_acc_total/test_batch_count) , test_batch_count)
-
         print('TRAINING data -> Testing Accuracy: {}\n'.format(test_batch_acc_total/test_batch_count))
         logging.info('TRAINING data -> Testing Accuracy: %s', (test_batch_acc_total/test_batch_count) )
 
         confusion = tf.math.confusion_matrix(labelsList, labelsPredictions, num_classes= 4)
         print('Confusion Matrix:\n', confusion.eval(session=sess))
         logging.info('Confusion Matrix:\n %s', confusion.eval(session=sess) )
-        #confMtx._test_cm( confusion, "Zbiór testowy" )
+

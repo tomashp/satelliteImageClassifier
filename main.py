@@ -15,9 +15,6 @@ processName = "HalfResolution"
 logging.basicConfig(filename= processName + '.log',level=logging.INFO,format='%(asctime)s %(message)s')
 logging.info('Process of %s is starting', processName )
 
-
-
-
 #defines
 if processName is "FullResolution":
     mainRasterPath = 'C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialu.tif'
@@ -55,14 +52,14 @@ logging.info('All data from raster will be kept in %s', allDataPreProcessedPath 
 
 # make 32x32 samples saves them at samplesPaths 
 # and create List of all samples [ name, classId, % of pixels of the class] and saves it to dataset_folder_path
-#samplesList = raster.sampleriseRaster(mainRasterPath, samplesPaths, dataset_folder_path + processName + "SamplesList", saveSamplesToDisc)
+samplesList = raster.sampleriseRaster(mainRasterPath, samplesPaths, dataset_folder_path + processName + "SamplesList", saveSamplesToDisc)
 #if you skip line before uncoment below
 # with open(dataset_folder_path + processName + "SamplesList.pkl", mode='rb') as file:
 #    samplesList = pickle.load(file, encoding='latin1')
 
 # prepers input for CNN
-# dataConversion.prepBatches( samplesList, samplesPaths, 7000, dataset_folder_path + processName + "TrainingBatch")       # for prepered set
-# dataConversion.prepBatches( samplesList, samplesPaths, 61168, allDataPreProcessedPath + processName + "AllDataBatch")   # for All data set
+dataConversion.prepBatches( samplesList, samplesPaths, 7000, dataset_folder_path + processName + "TrainingBatch")       # for prepered set
+dataConversion.prepBatches( samplesList, samplesPaths, 61168, allDataPreProcessedPath + processName + "AllDataBatch")   # for All data set
 
 # trains the network
 training.run(dataset_folder_path, save_model_path, processName + "TrainingBatch")

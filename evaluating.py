@@ -86,7 +86,6 @@ def test_model( save_model_path, allDataPreProcessedPath ):
         confusion = tf.math.confusion_matrix(labelsList, labelsPredictions, num_classes= 4)
         print('Confusion Matrix:\n', confusion.eval(session=sess))
         logging.info('ALL DATA: Confusion Matrix:\n %s', confusion.eval(session=sess) )
-        #confMtx._test_cm( confusion , "Zbiór cały" )
 
     f = open("allDataPredictionsTEST.pkl","wb")
     pickle.dump(allDataPredictions,f)

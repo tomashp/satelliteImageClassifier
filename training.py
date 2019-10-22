@@ -1,4 +1,3 @@
-# https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -186,8 +185,6 @@ def train_neural_network(session, optimizer, keep_probability, feature_batch, la
                     y: label_batch,
                     keep_prob: keep_probability
                 })
-    #tempIterator += 1
-    #train_writer.add_summary(summary, tempIterator)
 
 def print_stats(session, feature_batch, label_batch, cost, accuracy, x, y, keep_prob, sess, valid_features, valid_labels):
     loss = sess.run(cost, 

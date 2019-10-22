@@ -1,4 +1,3 @@
-# https://gis.stackexchange.com/questions/306861/split-geotiff-into-multiple-cells-with-rasterio
 from shapely import geometry
 from rasterio.mask import mask
 import rasterio
@@ -23,16 +22,12 @@ def createClassifiedMap(img, squareDim, transform):
     count = 0
     for hc in range(numberOfCellsHigh ):
         y = hc * squareDim
-        # if count == 20:
-        #         break
         for wc in range(numberOfCellsWide):
             x = wc * squareDim
             classifieGeom(img, count , x, y, squareDim, transform)
             print ("hc: {}".format(hc))
             print ("wc: {}".format(wc))
             count = count + 1
-            # if count == 20:
-            #     break
 
 
 # Crop the dataset using the generated box and write it out as a GeoTIFF https://datacarpentry.org/image-processing/04-drawing-bitwise/
@@ -80,30 +75,14 @@ def readSamplesToList( path ):
         temp = [ idx , int(sample[1])]
         sampleList.append(temp)
 
-
-# def createMasks():
-#     classZeroMask = np.zeros(shape = src.shape, dtype = "uint8")
-#     maskList[0] = classZeroMask.fill(0)
-#     classOneMask = np.zeros(shape = src.shape, dtype = "uint8")
-#     maskList[1] = classOneMask.fill(1)
-#     classTwoMask = np.zeros(shape = src.shape, dtype = "uint8")
-#     maskList[2] = classTwoMask.fill(2)
-#     classThreeMask = np.zeros(shape = src.shape, dtype = "uint8")
-#     maskList[3] = classThreeMask.fill(3)
-    
 rasterPath = 'C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialu.tif'
 destinationPath = 'D:/HalfResolution3_count/'
 listDestination = "D:/HalfResolution3_count/allDataPredictionsTEST.pkl"
-#FullResolutionSamplesList = "D:/HalfResolution3_count/FullResolutionSamplesList.pkl"
-#rasterPath = 'C:/Users/PlochaTo/Documents/TP/PG/MGR/rasterDoPodzialuSmooth.tif'
 src = rasterio.open( rasterPath )
 
 array = np.zeros(shape = (10980,10980) , dtype = "uint8")
 array.fill(7)
-# Create the basic black image 
-# createMasks()
 
-#readSamplesToList(FullResolutionSamplesList)
 readPredictionsToList(listDestination)
 createClassifiedMap(array, 32, src.transform)
 # with rasterio.open(destinationPath + "test.tif", "w", driver='GTiff', height=array.shape[0], width=array.shape[1], crs=src.crs, count=1, dtype=array.dtype , transform=src.transform) as dest:
