@@ -7,10 +7,10 @@ The aim of this project is comperison of neural network performance regarding qu
 
 ## Basics
 ### Input
-As an input you will need hi-resolution image. In this case we use 5 band image (RGB + infrared + NDVI) plus one band of pixel classes.
+As an input you will need hi-resolution image. In this case we use 5 band image (RGB + infrared + NDVI) for classification and training. When prepering data we use 6 band image where in 6th band classID of land type is stored (each pixel has its own ID).
 
 ### Classifiaction
-Network classifies 4 different classes with ID from 0 to 3. ID's are kept in 6th band (each pixel has its own ID). Network takes 32x32 pixels samples and classifaies it.
+Network recognise 4 different classes with ID from 0 to 3. 32x32 pixels samples from main image are categorise to class which has gratest amount of pixels in sample.
 
 ### Training&Testing
 1/5 of data provided in dataConversion.prepBatches() will be usead for testing pourposes. It is due to fact that we create 5 batches of data and one is for testing.
